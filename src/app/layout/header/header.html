@@ -1,0 +1,34 @@
+<header class="header">
+  <div class="header__left">
+    <div class="header__lang">
+      <button
+        class="header__lang-btn"
+        [class.header__lang-btn--active]="activeLang() === 'en'"
+        (click)="setLang('en')">
+        EN
+      </button>
+      <button
+        class="header__lang-btn"
+        [class.header__lang-btn--active]="activeLang() === 'de'"
+        (click)="setLang('de')">
+        DE
+      </button>
+    </div>
+
+    <nav class="header__nav">
+      <a href="#about" class="header__nav-link">About me</a>
+      <a href="#skills" class="header__nav-link">Skills</a>
+      <a href="#projects" class="header__nav-link">Projects</a>
+    </nav>
+  </div>
+
+  <a href="#" class="header__logo">
+    <svg class="header__logo-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 4H7L16 18L25 4H29V28H25V12L16 24L7 12V28H3Z" fill="currentColor" />
+    </svg>
+    <div class="header__logo-text">
+      <span class="header__logo-first">Max</span>
+      <span class="header__logo-last">Kipka</span>
+    </div>
+  </a>
+</header>

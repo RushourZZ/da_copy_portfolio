@@ -1,0 +1,111 @@
+@use 'styles/variables' as *;
+
+:host {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 48px;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__lang {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba($color-text, 0.12);
+    border-radius: 22px;
+    padding: 3px;
+  }
+
+  &__lang-btn {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 19px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    background: transparent;
+    color: rgba($color-text, 0.45);
+    transition: background 0.3s, color 0.3s;
+
+    &--active {
+      background: $color-accent;
+      color: $color-bg;
+      font-weight: 700;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+
+  &__nav-link {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba($color-text, 0.65);
+    transition: color 0.3s;
+
+    &:hover {
+      color: $color-text;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__logo-icon {
+    width: 34px;
+    height: 34px;
+    color: $color-accent;
+  }
+
+  &__logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  &__logo-first {
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-text;
+  }
+
+  &__logo-last {
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-text;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 14px 20px;
+
+    &__left {
+      gap: 24px;
+    }
+
+    &__nav {
+      display: none;
+    }
+  }
+}
