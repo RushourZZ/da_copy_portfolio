@@ -1,0 +1,125 @@
+@use 'styles/variables' as *;
+
+:host {
+  display: block;
+}
+
+.about {
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+  padding: 120px 80px;
+  background: $color-bg-dark;
+
+  &__image {
+    flex-shrink: 0;
+    width: 420px;
+    border-radius: 16px;
+
+    img {
+      width: 100%;
+      display: block;
+      border-radius: 16px;
+      filter: grayscale(1);
+      object-fit: cover;
+    }
+  }
+
+  &__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__label {
+    font-size: 18px;
+    font-weight: 500;
+    color: $color-accent;
+    letter-spacing: 0.04em;
+  }
+
+  &__card {
+    background: rgba($color-bg-teal, 0.25);
+    border: 1px solid rgba($color-accent, 0.7);
+    border-radius: 16px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__title {
+    font-size: clamp(40px, 5vw, 56px);
+    font-weight: 800;
+    color: $color-accent;
+    line-height: 1.1;
+  }
+
+  &__description {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba($color-text, 0.85);
+    text-align: justify;
+  }
+
+  &__highlights {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__highlight {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  &__highlight-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__highlight-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba($color-text, 0.75);
+    padding-top: 6px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .about {
+    flex-direction: column;
+    padding: 80px 32px;
+    gap: 48px;
+
+    &__image {
+      width: 100%;
+      max-width: 420px;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .about {
+    padding: 60px 20px;
+    gap: 36px;
+
+    &__card {
+      padding: 24px;
+      gap: 20px;
+    }
+  }
+}
