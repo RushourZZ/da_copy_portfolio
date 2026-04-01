@@ -1,1 +1,36 @@
-<p>skill works!</p>
+<section class="skill" id="skills">
+  <div class="skill__left">
+    <span class="skill__label">Technologies</span>
+
+    <div class="skill__card">
+      <h2 class="skill__title">Skill Set</h2>
+
+      <p class="skill__description">
+        I bring hands-on experience with a wide range of frontend
+        technologies and a genuine passion for learning. Staying
+        current with the rapid pace of web development isn't just
+        part of the job for me — it's what keeps me motivated
+        and inspired every day.
+      </p>
+
+      <p class="skill__cta-heading">
+        You need <span class="skill__cta-accent">another skill</span>?
+      </p>
+
+      <p class="skill__cta-text">
+        Feel free to contact me. I look forward to
+        expanding on my previous knowledge.
+      </p>
+
+      <a href="#contact" class="skill__btn">Let's Talk</a>
+    </div>
+  </div>
+
+  <div class="skill__grid">
+    @for (item of skills; track item.name) {
+      <div class="skill__item">
+        <img [src]="item.icon" [alt]="item.name" />
+      </div>
+    }
+  </div>
+</section>

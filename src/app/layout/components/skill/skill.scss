@@ -1,0 +1,147 @@
+@use 'styles/variables' as *;
+
+:host {
+  display: block;
+}
+
+.skill {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+  padding: 120px 80px;
+  background:
+    radial-gradient(ellipse 70% 80%at 0% 50%, rgba($color-accent, 0.09), transparent 70%),
+    $color-bg-dark;
+
+  &__left {
+    flex: 0 0 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__label {
+    font-size: 18px;
+    font-weight: 500;
+    color: $color-accent;
+    letter-spacing: 0.04em;
+  }
+
+  &__card {
+    background: rgba($color-bg-teal, 0.25);
+    border: 1px solid rgba($color-accent, 0.7);
+    
+    border-radius: 16px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__title {
+    font-size: clamp(40px, 5vw, 56px);
+    font-weight: 800;
+    color: $color-text;
+    line-height: 1.1;
+  }
+
+  &__description {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba($color-text, 0.75);
+    text-align: justify;
+  }
+
+  &__cta-heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: $color-text;
+  }
+
+  &__cta-accent {
+    color: $color-accent;
+  }
+
+  &__cta-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba($color-text, 0.55);
+  }
+
+  &__btn {
+    align-self: flex-start;
+    padding: 14px 32px;
+    border: 1px solid rgba($color-text, 0.25);
+    border-radius: $border-radius-btn;
+    color: $color-text;
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    background: transparent;
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s, background 0.3s;
+
+    &:hover {
+      border-color: $color-accent;
+      color: $color-accent;
+      background: rgba($color-accent, 0.06);
+    }
+  }
+
+  &__grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 32px;
+    align-self: flex-start;
+    margin-top: 48px;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    img {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .skill {
+    flex-direction: column;
+    padding: 80px 32px;
+    gap: 48px;
+
+    &__left {
+      flex: none;
+      width: 100%;
+    }
+
+    &__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .skill {
+    padding: 60px 20px;
+    gap: 36px;
+
+    &__card {
+      padding: 24px;
+    }
+
+    &__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px 24px;
+    }
+  }
+}

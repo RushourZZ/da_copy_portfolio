@@ -1,13 +1,6 @@
 @use 'styles/fonts';
 @use 'styles/variables' as *;
 
-:root {
-  --color-bg: #{$color-bg};
-  --color-accent: #{$color-accent};
-  --color-text: #{$color-text};
-  --font-main: 'Karla', system-ui, -apple-system, sans-serif;
-}
-
 *,
 *::before,
 *::after {
@@ -21,9 +14,9 @@ html {
 }
 
 body {
-  font-family: var(--font-main);
-  background: var(--color-bg);
-  color: var(--color-text);
+  font-family: $font-main;
+  background: $color-bg;
+  color: $color-text;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
