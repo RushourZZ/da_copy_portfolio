@@ -1,0 +1,152 @@
+@use 'styles/variables' as *;
+
+:host {
+  display: block;
+}
+
+.projects {
+  position: relative;
+  padding: 120px 80px;
+  background: $color-bg-dark;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 48px;
+    max-width: 700px;
+  }
+
+  &__label {
+    font-size: 18px;
+    font-weight: 500;
+    color: $color-accent;
+    letter-spacing: 0.04em;
+  }
+
+  &__title {
+    font-size: clamp(40px, 5vw, 56px);
+    font-weight: 800;
+    color: $color-accent;
+    line-height: 1.1;
+  }
+
+  &__description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba($color-text, 0.65);
+    max-width: 400px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 2px solid $color-accent;
+    max-width: 700px;
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 16px;
+    border-bottom: 2px solid $color-accent;
+    cursor: pointer;
+    transition: background 0.3s, padding-left 0.3s;
+
+    &:hover {
+      background: rgba($color-bg-teal, 0.45);
+
+      .projects__arrow {
+        opacity: 1;
+      }
+
+      .projects__preview-wrap {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 24px;
+    font-weight: 700;
+    color: $color-text;
+  }
+
+  &__arrow {
+    font-size: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &__techs {
+    font-size: 16px;
+    color: rgba($color-text, 0.55);
+    letter-spacing: 0.02em;
+  }
+
+  &__preview-wrap {
+    position: absolute;
+    right: -340px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 300px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s, transform 0.35s;
+    z-index: 10;
+  }
+
+  &__preview {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+    z-index: 2;
+  }
+
+  &__preview-shadow {
+    position: absolute;
+    inset: 16px -16px -16px 16px;
+    border-radius: 12px;
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba($color-accent, 0.35),
+      rgba($color-accent, 0.35) 2px,
+      transparent 2px,
+      transparent 9px
+    );
+    z-index: 1;
+  }
+}
+
+@media (max-width: 1200px) {
+  .projects {
+    &__preview-wrap {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .projects {
+    padding: 80px 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .projects {
+    padding: 60px 20px;
+
+    &__item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 24px 16px;
+    }
+  }
+}

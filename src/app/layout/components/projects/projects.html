@@ -1,1 +1,26 @@
-<p>projects works!</p>
+<section class="projects" id="projects">
+  <div class="projects__header">
+    <span class="projects__label">Portfolio</span>
+    <h2 class="projects__title">Featured Projects</h2>
+    <p class="projects__description">
+      Explore a selection of my work here - Interact with
+      projects to see my skills in action.
+    </p>
+  </div>
+
+  <div class="projects__list">
+    @for (project of projects; track project.name) {
+      <div class="projects__item">
+        <span class="projects__name">
+          {{ project.name }}
+          <span class="projects__arrow">&#8599;</span>
+        </span>
+        <span class="projects__techs">{{ project.techs.join(' | ') }}</span>
+        <div class="projects__preview-wrap">
+          <div class="projects__preview-shadow"></div>
+          <img class="projects__preview" [src]="project.image" [alt]="project.name" />
+        </div>
+      </div>
+    }
+  </div>
+</section>
