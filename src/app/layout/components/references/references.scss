@@ -1,0 +1,226 @@
+@use 'styles/variables' as *;
+
+:host {
+  display: block;
+}
+
+.references {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 80px 0 96px;
+  background: $color-bg-dark;
+
+  &__title {
+    font-size: clamp(40px, 4vw, 54px);
+    color: #2ad2c9;
+    text-align: center;
+    letter-spacing: 0.02em;
+    padding: 0 24px;
+  }
+
+  &__track {
+    --active-index: 1;
+    display: flex;
+    gap: 48px;
+    width: max-content;
+    transform: translateX(calc((1 - var(--active-index)) * 808px));
+    transition: transform 0.35s ease;
+  }
+
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 760px;
+    min-height: 360px;
+    border: 1px solid rgba(#2ad2c9, 0.9);
+    border-radius: 36px;
+    padding: 58px 34px 34px;
+    background: rgba(#0f3a36, 0.82);
+    opacity: 0.5;
+    transition: opacity 0.3s ease, border-color 0.3s ease;
+  }
+
+  &__card--active {
+    opacity: 1;
+    border-color: #2ad2c9;
+  }
+
+  &__quotes {
+    position: absolute;
+    top: -16px;
+    left: -34px;
+    width: 98px;
+    height: 72px;
+    object-fit: contain;
+  }
+
+  &__text {
+    font-size: 24px;
+    line-height: 1.2;
+    color: rgba($color-text, 0.9);
+    margin-bottom: 24px;
+    max-width: 690px;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: auto;
+  }
+
+  &__line {
+    width: 62%;
+    border-top: 1px solid rgba($color-text, 0.75);
+  }
+
+  &__author {
+    font-size: 20px;
+    color: rgba($color-text, 0.95);
+    white-space: nowrap;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &__arrow {
+    width: 44px;
+    height: 44px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+
+    img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+  }
+
+  &__dots {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba($color-text, 0.8);
+    cursor: pointer;
+  }
+
+  &__dot--active {
+    background: #2ad2c9;
+  }
+}
+
+@media (max-width: 1600px) {
+  .references {
+    &__track {
+      gap: 32px;
+      transform: translateX(calc((1 - var(--active-index)) * 652px));
+    }
+
+    &__card {
+      width: 620px;
+      min-height: 228px;
+      border-radius: 30px;
+      padding: 52px 30px 30px;
+    }
+
+    &__text {
+      font-size: 27px;
+    }
+
+    &__author {
+      font-size: 22px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .references {
+    padding: 70px 24px 90px;
+
+    &__track {
+      width: 100%;
+      flex-direction: column;
+      transform: none;
+      gap: 20px;
+    }
+
+    &__card {
+      width: 100%;
+      min-height: 210px;
+      opacity: 0.35;
+    }
+
+    &__card--active {
+      opacity: 1;
+    }
+
+    &__text {
+      font-size: 22px;
+      max-width: 100%;
+    }
+
+    &__meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    &__line {
+      width: 100%;
+    }
+
+    &__author {
+      font-size: 20px;
+      white-space: normal;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .references {
+    padding: 56px 20px 80px;
+    gap: 30px;
+
+    &__title {
+      font-size: 34px;
+    }
+
+    &__card {
+      border-radius: 24px;
+      padding: 48px 20px 24px;
+    }
+
+    &__quotes {
+      width: 84px;
+      height: 62px;
+      top: -14px;
+      left: -20px;
+    }
+
+    &__text {
+      font-size: 18px;
+      line-height: 1.35;
+      margin-bottom: 22px;
+    }
+
+    &__author {
+      font-size: 16px;
+    }
+  }
+}

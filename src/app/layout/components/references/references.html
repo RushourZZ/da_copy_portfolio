@@ -1,1 +1,44 @@
-<p>references works!</p>
+<section class="references" id="references">
+  <h2 class="references__title">What my colleagues say about me</h2>
+
+  <div class="references__track" [style.--active-index]="activeIndex">
+    @for (reference of references; track reference.author) {
+      <article class="references__card" [class.references__card--active]="$index === activeIndex">
+        @if ($index === activeIndex) {
+          <img class="references__quotes" src="assets/icons/quotes.png" alt="Quote icon" />
+        }
+
+        <p class="references__text">
+          {{ reference.text }}
+        </p>
+
+        <div class="references__meta">
+          <span class="references__line"></span>
+          <span class="references__author">{{ reference.author }} - {{ reference.role }}</span>
+        </div>
+      </article>
+    }
+  </div>
+
+  <div class="references__controls">
+    <button class="references__arrow" type="button" aria-label="Previous reference" (click)="previous()">
+      <img src="assets/icons/arrow-left.png" alt="" />
+    </button>
+
+    <div class="references__dots">
+      @for (item of references; track item.author) {
+        <button
+          class="references__dot"
+          [class.references__dot--active]="$index === activeIndex"
+          type="button"
+          [attr.aria-label]="'Show reference ' + ($index + 1)"
+          (click)="select($index)">
+        </button>
+      }
+    </div>
+
+    <button class="references__arrow" type="button" aria-label="Next reference" (click)="next()">
+      <img src="assets/icons/arrow-right.png" alt="" />
+    </button>
+  </div>
+</section>
