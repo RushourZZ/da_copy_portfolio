@@ -1,0 +1,234 @@
+@use 'styles/variables' as *;
+
+:host {
+  display: block;
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  padding: 90px 64px 120px;
+  background: $color-bg-dark;
+
+  &__intro {
+    max-width: 460px;
+  }
+
+  &__label {
+    display: inline-block;
+    font-size: 38px;
+    color: #2ad2c9;
+    margin-bottom: 22px;
+  }
+
+  &__title {
+    font-size: clamp(54px, 6vw, 90px);
+    line-height: 0.95;
+    color: #2ad2c9;
+    margin-bottom: 44px;
+  }
+
+  &__subtitle {
+    font-size: 48px;
+    color: #2ad2c9;
+    margin-bottom: 18px;
+  }
+
+  &__text {
+    font-size: 29px;
+    line-height: 1.22;
+    color: rgba($color-text, 0.92);
+    margin-bottom: 24px;
+  }
+
+  &__cta {
+    font-size: 30px;
+    color: rgba($color-text, 0.96);
+
+    a {
+      color: #2ad2c9;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 8px;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 0 18px;
+    border-top: 1px solid rgba(#2ad2c9, 0.8);
+  }
+
+  &__field-title {
+    font-size: 50px;
+    color: #2ad2c9;
+  }
+
+  &__error {
+    font-size: 34px;
+    color: #d57579;
+    min-height: 44px;
+  }
+
+  input[type='text'],
+  input[type='email'],
+  textarea {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: rgba($color-text, 0.94);
+    font-size: 36px;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba($color-text, 0.8);
+  }
+
+  &__policy {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 30px;
+    color: rgba($color-text, 0.95);
+    padding-top: 14px;
+
+    input {
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border: 1px solid #2ad2c9;
+      background: transparent;
+      cursor: pointer;
+      flex: 0 0 auto;
+
+      &:checked {
+        background: #2ad2c9;
+      }
+    }
+
+    a {
+      color: #2ad2c9;
+    }
+  }
+
+  &__policy-error {
+    margin-top: -10px;
+    font-size: 28px;
+    color: #d57579;
+  }
+
+  &__submit {
+    margin: 10px auto 0;
+    min-width: 198px;
+    padding: 11px 30px;
+    border-radius: 999px;
+    border: 1px solid rgba($color-text, 0.45);
+    background: transparent;
+    color: rgba($color-text, 0.88);
+    font-size: 35px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.25s ease, color 0.25s ease;
+
+    &:hover {
+      border-color: #2ad2c9;
+      color: #2ad2c9;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .contact {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 72px 28px 96px;
+
+    &__field-title {
+      font-size: 42px;
+    }
+
+    &__error {
+      font-size: 28px;
+    }
+
+    input[type='text'],
+    input[type='email'],
+    textarea {
+      font-size: 30px;
+    }
+
+    &__policy {
+      font-size: 22px;
+    }
+
+    &__policy-error {
+      font-size: 22px;
+    }
+
+    &__submit {
+      font-size: 28px;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .contact {
+    padding: 56px 20px 80px;
+
+    &__label {
+      font-size: 20px;
+    }
+
+    &__title {
+      font-size: 58px;
+    }
+
+    &__subtitle {
+      font-size: 30px;
+    }
+
+    &__text,
+    &__cta {
+      font-size: 18px;
+    }
+
+    &__field-title {
+      font-size: 32px;
+    }
+
+    &__error {
+      font-size: 20px;
+      min-height: 30px;
+    }
+
+    input[type='text'],
+    input[type='email'],
+    textarea {
+      font-size: 18px;
+    }
+
+    &__policy {
+      font-size: 16px;
+      align-items: flex-start;
+    }
+
+    &__policy-error {
+      font-size: 16px;
+    }
+
+    &__submit {
+      font-size: 24px;
+    }
+  }
+}
