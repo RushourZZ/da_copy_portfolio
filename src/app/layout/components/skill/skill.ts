@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LanguageService } from '../../../language.service';
 
 @Component({
   selector: 'app-skill',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './skill.scss',
 })
 export class Skill {
+  private readonly language = inject(LanguageService);
+  protected readonly lang = this.language.lang;
   protected readonly skills = [
     { name: 'HTML', icon: 'assets/icons/html.png' },
     { name: 'CSS', icon: 'assets/icons/css.png' },

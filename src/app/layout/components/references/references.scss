@@ -58,8 +58,8 @@
   }
 
   &__text {
-    font-size: 24px;
-    line-height: 1.2;
+    font-size: 20px;
+    line-height: 1.35;
     color: rgba($color-text, 0.9);
     margin-bottom: 24px;
     max-width: 690px;
@@ -78,7 +78,7 @@
   }
 
   &__author {
-    font-size: 20px;
+    font-size: 16px;
     color: rgba($color-text, 0.95);
     white-space: nowrap;
   }
@@ -140,11 +140,11 @@
     }
 
     &__text {
-      font-size: 27px;
+      font-size: 18px;
     }
 
     &__author {
-      font-size: 22px;
+      font-size: 16px;
     }
   }
 }
@@ -171,7 +171,7 @@
     }
 
     &__text {
-      font-size: 22px;
+      font-size: 18px;
       max-width: 100%;
     }
 
@@ -186,7 +186,7 @@
     }
 
     &__author {
-      font-size: 20px;
+      font-size: 16px;
       white-space: normal;
     }
   }

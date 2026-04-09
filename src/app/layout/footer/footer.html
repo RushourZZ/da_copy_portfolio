@@ -1,1 +1,24 @@
-<p>footer works!</p>
+<footer class="footer">
+  <div class="footer__brand">
+    <a class="footer__logo" href="#">
+      <svg class="footer__logo-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 4H7L16 18L25 4H29V28H25V12L16 24L7 12V28H3Z" fill="currentColor" />
+      </svg>
+      <div class="footer__logo-text">
+        <span class="footer__logo-first">Max</span>
+        <span class="footer__logo-last">Kipka</span>
+      </div>
+    </a>
+    <span class="footer__meta">{{ lang() === 'de' ? 'Web Entwickler' : 'Web Developer' }}</span>
+    <span class="footer__meta">{{ lang() === 'de' ? 'Bayern Deutschland' : 'Bavaria Germany' }}</span>
+  </div>
+
+  <div class="footer__copy">© Max Kipka 2025</div>
+
+  <nav class="footer__links">
+    <a href="https://github.com/" target="_blank" rel="noreferrer">Github</a>
+    <a href="https://linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+    <a href="mailto:kontakt@kunden-navigator.de">{{ lang() === 'de' ? 'E-Mail' : 'Email' }}</a>
+    <a href="#">{{ lang() === 'de' ? 'Impressum' : 'Legal Notice' }}</a>
+  </nav>
+</footer>

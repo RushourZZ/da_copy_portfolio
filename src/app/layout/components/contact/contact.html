@@ -1,38 +1,58 @@
 <section class="contact" id="contact">
   <div class="contact__intro">
-    <span class="contact__label">Contact me</span>
-    <h2 class="contact__title">Let's work together</h2>
-    <h3 class="contact__subtitle">Got a problem to solve?</h3>
-    <p class="contact__text">
-      Encourage people to contact you and describe what role you are
-      interested in. Show that you will add value to their projects
-      through your work.
-    </p>
-    <p class="contact__cta">
-      Need a Frontend developer? <a href="#contact">Let's talk!</a>
-    </p>
+    <span class="contact__label">{{ lang() === 'de' ? 'Kontakt' : 'Contact me' }}</span>
+    <h2 class="contact__title">{{ lang() === 'de' ? 'Lass uns zusammen arbeiten' : "Let's work together" }}</h2>
+    <h3 class="contact__subtitle">{{ lang() === 'de' ? 'Hast du ein Problem zu lösen?' : 'Got a problem to solve?' }}</h3>
+    @if (lang() === 'de') {
+      <p class="contact__text">
+        Beschreibe mir gerne deine Aufgabe und welche Rolle ich in deinem
+        Projekt übernehmen kann. Ich zeige dir, wie ich echten Mehrwert
+        in deine Umsetzung bringe.
+      </p>
+      <p class="contact__cta">
+        Du brauchst einen Frontend Entwickler? <a href="#contact">Lass uns reden!</a>
+      </p>
+    } @else {
+      <p class="contact__text">
+        Encourage people to contact you and describe what role you are
+        interested in. Show that you will add value to their projects
+        through your work.
+      </p>
+      <p class="contact__cta">
+        Need a Frontend developer? <a href="#contact">Let's talk!</a>
+      </p>
+    }
   </div>
 
   <form class="contact__form" [formGroup]="form" (ngSubmit)="submit()">
     <label class="contact__field">
-      <span class="contact__field-title">What's your name?</span>
-      <input type="text" formControlName="name" placeholder="Your name goes here" />
+      <span class="contact__field-title">{{ lang() === 'de' ? 'Wie heisst du?' : "What's your name?" }}</span>
+      <input
+        type="text"
+        formControlName="name"
+        [placeholder]="lang() === 'de' ? 'Dein Name kommt hier hin' : 'Your name goes here'" />
       @if (error('name')) {
         <span class="contact__error">{{ error('name') }}</span>
       }
     </label>
 
     <label class="contact__field">
-      <span class="contact__field-title">What's your email?</span>
-      <input type="email" formControlName="email" placeholder="youremail@email.com" />
+      <span class="contact__field-title">{{ lang() === 'de' ? 'Wie lautet deine E-Mail?' : "What's your email?" }}</span>
+      <input
+        type="email"
+        formControlName="email"
+        [placeholder]="lang() === 'de' ? 'deine@email.com' : 'your@email.com'" />
       @if (error('email')) {
         <span class="contact__error">{{ error('email') }}</span>
       }
     </label>
 
     <label class="contact__field">
-      <span class="contact__field-title">How can I help you?</span>
-      <textarea formControlName="message" rows="1" placeholder="Hello Lukas, I am interested in..."></textarea>
+      <span class="contact__field-title">{{ lang() === 'de' ? 'Wie kann ich helfen?' : 'How can I help you?' }}</span>
+      <textarea
+        formControlName="message"
+        rows="1"
+        [placeholder]="lang() === 'de' ? 'Hallo Max, ich interessiere mich für...' : 'Hello Max, I am interested in...'"></textarea>
       @if (error('message')) {
         <span class="contact__error">{{ error('message') }}</span>
       }
@@ -40,12 +60,16 @@
 
     <label class="contact__policy">
       <input type="checkbox" formControlName="consent" />
-      <span>I've read the <a href="#">privacy policy</a> and agree to the processing of my data as outlined.</span>
+      @if (lang() === 'de') {
+        <span>Ich habe die <a href="#">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu.</span>
+      } @else {
+        <span>I've read the <a href="#">privacy policy</a> and agree to the processing of my data as outlined.</span>
+      }
     </label>
     @if (consentError()) {
       <span class="contact__policy-error">{{ consentError() }}</span>
     }
 
-    <button type="submit" class="contact__submit">Say Hello ;)</button>
+    <button type="submit" class="contact__submit">{{ lang() === 'de' ? 'Sag Hallo ;)' : 'Say Hello ;)' }}</button>
   </form>
 </section>

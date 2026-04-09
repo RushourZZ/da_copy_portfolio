@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LanguageService } from '../../../language.service';
 
 @Component({
   selector: 'app-references',
@@ -7,9 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './references.scss',
 })
 export class ReferencesComponent {
+  private readonly language = inject(LanguageService);
+  protected readonly lang = this.language.lang;
   protected activeIndex = 1;
 
-  protected readonly references = [
+  private readonly referencesEn = [
     {
       text: 'Max, your reliability and proactive mindset made a real difference for our team. Your technical skills helped us deliver our project with confidence.',
       author: 'H. Janisch',
@@ -26,6 +29,27 @@ export class ReferencesComponent {
       role: 'Frontend Developer',
     },
   ];
+  private readonly referencesDe = [
+    {
+      text: 'Max, deine Zuverlässigkeit und dein proaktives Denken haben unser Team spürbar vorangebracht. Deine technischen Fähigkeiten haben den Projekterfolg mitgetragen.',
+      author: 'H. Janisch',
+      role: 'Teamkollege',
+    },
+    {
+      text: 'Max, die Zusammenarbeit mit dir in einem anspruchsvollen Frontend Projekt war großartig. Du bliebst ruhig, hast das Team ausgerichtet und konstant saubere Lösungen geliefert.',
+      author: 'A. Becker',
+      role: 'Projektleitung',
+    },
+    {
+      text: 'Max, die Zusammenarbeit mit dir ist effizient und angenehm. Du kommunizierst klar, teilst Wissen offen und unterstützt das Team bei jeder Herausforderung.',
+      author: 'T. Schulz',
+      role: 'Frontend Entwickler',
+    },
+  ];
+
+  protected get references() {
+    return this.lang() === 'de' ? this.referencesDe : this.referencesEn;
+  }
 
   protected previous(): void {
     const last = this.references.length - 1;

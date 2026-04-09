@@ -9,7 +9,7 @@
   </div>
 
   <div class="hero__content">
-    <p class="hero__subtitle">Frontend Developer</p>
+    <p class="hero__subtitle">{{ lang() === 'de' ? 'Frontend Entwickler' : 'Frontend Developer' }}</p>
     <h1 class="hero__title">
       <svg class="hero__star" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -20,8 +20,8 @@
       Max Kipka
     </h1>
     <div class="hero__actions">
-      <a href="#projects" class="hero__btn">Check my work</a>
-      <a href="#contact" class="hero__btn">Contact me</a>
+      <a href="#projects" class="hero__btn">{{ lang() === 'de' ? 'Meine Projekte' : 'Check my work' }}</a>
+      <a href="#contact" class="hero__btn">{{ lang() === 'de' ? 'Kontakt' : 'Contact me' }}</a>
     </div>
   </div>
 

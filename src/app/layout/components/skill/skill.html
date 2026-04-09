@@ -1,28 +1,49 @@
 <section class="skill" id="skills">
   <div class="skill__left">
-    <span class="skill__label">Technologies</span>
+    <span class="skill__label">{{ lang() === 'de' ? 'Technologien' : 'Technologies' }}</span>
 
     <div class="skill__card">
-      <h2 class="skill__title">Skill Set</h2>
+      <h2 class="skill__title">{{ lang() === 'de' ? 'Fähigkeiten' : 'Skill Set' }}</h2>
 
-      <p class="skill__description">
-        I bring hands-on experience with a wide range of frontend
-        technologies and a genuine passion for learning. Staying
-        current with the rapid pace of web development isn't just
-        part of the job for me — it's what keeps me motivated
-        and inspired every day.
-      </p>
+      @if (lang() === 'de') {
+        <p class="skill__description">
+          Ich bringe praktische Erfahrung mit einer breiten Palette
+          moderner Frontend Technologien mit und lerne mit echter
+          Begeisterung weiter. Mit dem schnellen Wandel in der
+          Webentwicklung Schritt zu halten ist für mich nicht nur
+          Pflicht, sondern tägliche Motivation.
+        </p>
+      } @else {
+        <p class="skill__description">
+          I bring hands-on experience with a wide range of frontend
+          technologies and a genuine passion for learning. Staying
+          current with the rapid pace of web development isn't just
+          part of the job for me — it's what keeps me motivated
+          and inspired every day.
+        </p>
+      }
 
       <p class="skill__cta-heading">
-        You need <span class="skill__cta-accent">another skill</span>?
+        @if (lang() === 'de') {
+          Du brauchst <span class="skill__cta-accent">eine weitere Fähigkeit</span>?
+        } @else {
+          You need <span class="skill__cta-accent">another skill</span>?
+        }
       </p>
 
-      <p class="skill__cta-text">
-        Feel free to contact me. I look forward to
-        expanding on my previous knowledge.
-      </p>
+      @if (lang() === 'de') {
+        <p class="skill__cta-text">
+          Kontaktiere mich gerne. Ich freue mich darauf,
+          mein Wissen stetig zu erweitern.
+        </p>
+      } @else {
+        <p class="skill__cta-text">
+          Feel free to contact me. I look forward to
+          expanding on my previous knowledge.
+        </p>
+      }
 
-      <a href="#contact" class="skill__btn">Let's Talk</a>
+      <a href="#contact" class="skill__btn">{{ lang() === 'de' ? 'Lass uns reden' : "Let's Talk" }}</a>
     </div>
   </div>
 

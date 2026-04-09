@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LanguageService } from '../../../language.service';
 
 @Component({
   selector: 'app-projects',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './projects.scss',
 })
 export class Projects {
+  private readonly language = inject(LanguageService);
+  protected readonly lang = this.language.lang;
   protected readonly projects = [
     { name: 'Join', techs: ['Angular', 'TypeScript', 'HTML', 'CSS', 'Firebase'], image: 'assets/img/join.png' },
     { name: 'El Pollo Loco', techs: ['HTML', 'CSS', 'JavaScript'], image: 'assets/img/loco.png' },

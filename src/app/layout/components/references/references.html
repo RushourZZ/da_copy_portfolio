@@ -1,5 +1,5 @@
 <section class="references" id="references">
-  <h2 class="references__title">What my colleagues say about me</h2>
+  <h2 class="references__title">{{ lang() === 'de' ? 'Was Kolleginnen und Kollegen über mich sagen' : 'What my colleagues say about me' }}</h2>
 
   <div class="references__track" [style.--active-index]="activeIndex">
     @for (reference of references; track reference.author) {
@@ -21,7 +21,11 @@
   </div>
 
   <div class="references__controls">
-    <button class="references__arrow" type="button" aria-label="Previous reference" (click)="previous()">
+    <button
+      class="references__arrow"
+      type="button"
+      [attr.aria-label]="lang() === 'de' ? 'Vorherige Referenz' : 'Previous reference'"
+      (click)="previous()">
       <img src="assets/icons/arrow-left.png" alt="" />
     </button>
 
@@ -31,13 +35,17 @@
           class="references__dot"
           [class.references__dot--active]="$index === activeIndex"
           type="button"
-          [attr.aria-label]="'Show reference ' + ($index + 1)"
+          [attr.aria-label]="(lang() === 'de' ? 'Zeige Referenz ' : 'Show reference ') + ($index + 1)"
           (click)="select($index)">
         </button>
       }
     </div>
 
-    <button class="references__arrow" type="button" aria-label="Next reference" (click)="next()">
+    <button
+      class="references__arrow"
+      type="button"
+      [attr.aria-label]="lang() === 'de' ? 'Naechste Referenz' : 'Next reference'"
+      (click)="next()">
       <img src="assets/icons/arrow-right.png" alt="" />
     </button>
   </div>

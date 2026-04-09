@@ -4,51 +4,87 @@
   </div>
 
   <div class="about__text">
-    <span class="about__label">Who I Am</span>
+    <span class="about__label">{{ lang() === 'de' ? 'Wer ich bin' : 'Who I Am' }}</span>
 
     <div class="about__card">
-      <h2 class="about__title">About me</h2>
+      <h2 class="about__title">{{ lang() === 'de' ? 'Über mich' : 'About me' }}</h2>
 
-      <p class="about__description">
-        Hey there, I'm Max! As a frontend developer, I'm all about
-        turning ideas into clean, performant code. I'm fascinated by
-        how lines of code become living interfaces that people actually
-        enjoy using. Every project is a new chance to blur the line
-        between technology and design.
-      </p>
+      @if (lang() === 'de') {
+        <p class="about__description">
+          Hi, ich bin Max! Als Frontend Entwickler liebe ich es, Ideen in
+          sauberen, performanten Code zu verwandeln. Mich fasziniert,
+          wie aus Code lebendige Interfaces entstehen, die Menschen gerne
+          nutzen. Jedes Projekt ist für mich eine neue Chance, Technologie
+          und Design miteinander zu verbinden.
+        </p>
+      } @else {
+        <p class="about__description">
+          Hey there, I'm Max! As a frontend developer, I'm all about
+          turning ideas into clean, performant code. I'm fascinated by
+          how lines of code become living interfaces that people actually
+          enjoy using. Every project is a new chance to blur the line
+          between technology and design.
+        </p>
+      }
 
       <ul class="about__highlights">
         <li class="about__highlight">
           <span class="about__highlight-icon">
             <img src="assets/icons/location_on.png" alt="Location" />
           </span>
-          <span class="about__highlight-text">
-            Based in Munich, I work both on-site and remotely.
-            Flexibility comes naturally to me — what matters
-            is the result, not the location.
-          </span>
+          @if (lang() === 'de') {
+            <span class="about__highlight-text">
+              Ich lebe in Bayern und arbeite sowohl vor Ort als auch
+              remote. Flexibilität ist für mich selbstverständlich -
+              entscheidend ist das Ergebnis, nicht der Ort.
+            </span>
+          } @else {
+            <span class="about__highlight-text">
+              Based in Bavaria, I work both on-site and remotely.
+              Flexibility comes naturally to me — what matters
+              is the result, not the location.
+            </span>
+          }
         </li>
         <li class="about__highlight">
           <span class="about__highlight-icon">
             <img src="assets/icons/about2.png" alt="Open-minded" />
           </span>
-          <span class="about__highlight-text">
-            New technologies aren't a risk to me — they're an
-            invitation. Whether it's Angular, React, or the next big
-            framework, I dive in, learn fast, and bring fresh
-            perspectives to the team.
-          </span>
+          @if (lang() === 'de') {
+            <span class="about__highlight-text">
+              Neue Technologien sind für mich kein Risiko, sondern eine
+              Einladung. Ob Angular, React oder das naechste Framework:
+              Ich tauche ein, lerne schnell und bringe neue Perspektiven
+              ins Team.
+            </span>
+          } @else {
+            <span class="about__highlight-text">
+              New technologies aren't a risk to me — they're an
+              invitation. Whether it's Angular, React, or the next big
+              framework, I dive in, learn fast, and bring fresh
+              perspectives to the team.
+            </span>
+          }
         </li>
         <li class="about__highlight">
           <span class="about__highlight-icon">
             <img src="assets/icons/about3.png" alt="Problem solving" />
           </span>
-          <span class="about__highlight-text">
-            Every challenge is a puzzle waiting to be solved. I analyze,
-            experiment, and iterate until the solution doesn't just work
-            but feels elegant. Creativity, persistence, and collaboration
-            are what drive me forward.
-          </span>
+          @if (lang() === 'de') {
+            <span class="about__highlight-text">
+              Jede Herausforderung ist für mich ein Puzzle. Ich analysiere,
+              experimentiere und verbessere, bis die Lösung nicht nur
+              funktioniert, sondern sich auch elegant anfühlt. Kreativität,
+              Ausdauer und Teamarbeit treiben mich an.
+            </span>
+          } @else {
+            <span class="about__highlight-text">
+              Every challenge is a puzzle waiting to be solved. I analyze,
+              experiment, and iterate until the solution doesn't just work
+              but feels elegant. Creativity, persistence, and collaboration
+              are what drive me forward.
+            </span>
+          }
         </li>
       </ul>
     </div>

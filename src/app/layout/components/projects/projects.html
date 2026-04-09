@@ -1,11 +1,18 @@
 <section class="projects" id="projects">
   <div class="projects__header">
     <span class="projects__label">Portfolio</span>
-    <h2 class="projects__title">Featured Projects</h2>
-    <p class="projects__description">
-      Explore a selection of my work here - Interact with
-      projects to see my skills in action.
-    </p>
+    <h2 class="projects__title">{{ lang() === 'de' ? 'Ausgewählte Projekte' : 'Featured Projects' }}</h2>
+    @if (lang() === 'de') {
+      <p class="projects__description">
+        Entdecke hier eine Auswahl meiner Arbeit - Interagiere mit den
+        Projekten, um meine Fähigkeiten in Aktion zu sehen.
+      </p>
+    } @else {
+      <p class="projects__description">
+        Explore a selection of my work here - Interact with
+        projects to see my skills in action.
+      </p>
+    }
   </div>
 
   <div class="projects__list">

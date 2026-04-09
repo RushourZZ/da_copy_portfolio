@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Lang, LanguageService } from '../../language.service';
 
 @Component({
   selector: 'app-header',
@@ -6,9 +7,10 @@ import { Component, signal } from '@angular/core';
   styleUrl: './header.scss',
 })
 export class Header {
-  protected readonly activeLang = signal<'en' | 'de'>('en');
+  private readonly language = inject(LanguageService);
+  protected readonly activeLang = this.language.lang;
 
-  protected setLang(lang: 'en' | 'de') {
-    this.activeLang.set(lang);
+  protected setLang(lang: Lang): void {
+    this.language.setLang(lang);
   }
 }

@@ -16,9 +16,9 @@
     </div>
 
     <nav class="header__nav">
-      <a href="#about" class="header__nav-link">About me</a>
+      <a href="#about" class="header__nav-link">{{ activeLang() === 'de' ? 'Über mich' : 'About me' }}</a>
       <a href="#skills" class="header__nav-link">Skills</a>
-      <a href="#projects" class="header__nav-link">Projects</a>
+      <a href="#projects" class="header__nav-link">{{ activeLang() === 'de' ? 'Projekte' : 'Projects' }}</a>
     </nav>
   </div>
 

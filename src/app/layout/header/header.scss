@@ -10,10 +10,12 @@
 }
 
 .header {
+  background: linear-gradient(180deg, rgba(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 18px 48px;
+  // border-bottom: 1px solid rgba($color-text, 0.08);
 
   &__left {
     display: flex;
