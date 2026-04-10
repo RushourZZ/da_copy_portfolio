@@ -13,12 +13,13 @@
     <span class="footer__meta">{{ lang() === 'de' ? 'Bayern Deutschland' : 'Bavaria Germany' }}</span>
   </div>
 
-  <div class="footer__copy">© Max Kipka 2025</div>
+  <div class="footer__copy">© Max Kipka 2026</div>
 
   <nav class="footer__links">
     <a href="https://github.com/" target="_blank" rel="noreferrer">Github</a>
     <a href="https://linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
     <a href="mailto:kontakt@kunden-navigator.de">{{ lang() === 'de' ? 'E-Mail' : 'Email' }}</a>
-    <a href="#">{{ lang() === 'de' ? 'Impressum' : 'Legal Notice' }}</a>
+    <a [href]="lang() === 'de' ? '/datenschutz' : '/privacy-policy'">{{ lang() === 'de' ? 'Datenschutz' : 'Privacy Policy' }}</a>
+    <a [href]="lang() === 'de' ? '/impressum' : '/legal-notice'">{{ lang() === 'de' ? 'Impressum' : 'Legal Notice' }}</a>
   </nav>
 </footer>

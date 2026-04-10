@@ -73,6 +73,72 @@
     gap: 12px;
   }
 
+  &__mobile-logo,
+  &__menu-btn {
+    display: none;
+  }
+
+  &__menu-icon {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__menu-bar {
+    display: block;
+    width: 34px;
+    height: 2px;
+    background: $color-text;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    transform-origin: center;
+  }
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      90deg,
+      rgba($color-bg-dark, 0.98) 0%,
+      rgba($color-bg-dark, 0.92) 45%,
+      rgba($color-bg-teal, 0.88) 100%
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 110;
+  }
+
+  &__overlay--open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &__overlay-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    min-width: 260px;
+  }
+
+  &__overlay-link {
+    font-size: 36px;
+    font-weight: 700;
+    color: $color-text;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+
+  &__overlay-lang {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
   &__logo-icon {
     width: 34px;
     height: 34px;
@@ -103,11 +169,52 @@
     padding: 14px 20px;
 
     &__left {
-      gap: 24px;
+      display: none;
     }
 
-    &__nav {
+    &__logo--desktop {
       display: none;
+    }
+
+    &__mobile-logo {
+      display: inline-flex;
+      align-items: center;
+      color: $color-accent;
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1;
+      z-index: 120;
+    }
+
+    &__menu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      cursor: pointer;
+      z-index: 120;
+      width: 44px;
+      height: 44px;
+
+      &--open {
+        .header__menu-bar:nth-child(1) {
+          transform: translateY(8px) rotate(45deg);
+        }
+
+        .header__menu-bar:nth-child(2) {
+          opacity: 0;
+        }
+
+        .header__menu-bar:nth-child(3) {
+          transform: translateY(-8px) rotate(-45deg);
+        }
+      }
+    }
+
+    &__overlay-link {
+      font-size: 28px;
     }
   }
 }

@@ -61,9 +61,9 @@
     <label class="contact__policy">
       <input type="checkbox" formControlName="consent" />
       @if (lang() === 'de') {
-        <span>Ich habe die <a href="#">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu.</span>
+        <span>Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu.</span>
       } @else {
-        <span>I've read the <a href="#">privacy policy</a> and agree to the processing of my data as outlined.</span>
+        <span>I've read the <a href="/privacy-policy">privacy policy</a> and agree to the processing of my data as outlined.</span>
       }
     </label>
     @if (consentError()) {

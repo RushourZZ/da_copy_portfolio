@@ -21,6 +21,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body.body--menu-open {
+  overflow-y: clip;
+  touch-action: none;
+}
+
+body.body--dialog-open {
+  overflow-y: clip;
+}
+
 a {
   text-decoration: none;
   color: inherit;

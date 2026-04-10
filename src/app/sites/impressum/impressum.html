@@ -1,0 +1,32 @@
+<section class="impressum">
+  <div class="impressum__content">
+    <h1 class="impressum__title">{{ lang() === 'de' ? 'Impressum' : 'Legal Notice' }}</h1>
+
+    <section class="impressum__block">
+      <h2 class="impressum__heading">{{ lang() === 'de' ? 'Website-Betreiber:' : 'Website Operator:' }}</h2>
+      <p>Maximilian Kipka</p>
+      <p>c/o Online Impressum.de #12345</p>
+      <p>Europaring 90</p>
+      <p>53757 Sankt Augustin</p>
+      <p>{{ lang() === 'de' ? 'Deutschland' : 'Germany' }}</p>
+    </section>
+
+    <section class="impressum__block">
+      <h2 class="impressum__heading">{{ lang() === 'de' ? 'Kontaktinformationen:' : 'Contact Information:' }}</h2>
+      <p>
+        {{ lang() === 'de' ? 'E-Mail:' : 'Email:' }}
+        <a href="mailto:kontakt@kunden-navigator.de">kontakt@kunden-navigator.de</a>
+      </p>
+      <p>
+        Website:
+        <a href="https://www.kunden-navigator.de" target="_blank" rel="noreferrer">https://www.kunden-navigator.de</a>
+      </p>
+    </section>
+
+    <section class="impressum__block">
+      <h2 class="impressum__heading">{{ lang() === 'de' ? 'Vertretungsberechtigte Person:' : 'Authorized Representative:' }}</h2>
+      <p>Maximilian Kipka</p>
+      <p>{{ lang() === 'de' ? '(Geschäftsführer/in)' : '(Managing Director)' }}</p>
+    </section>
+  </div>
+</section>

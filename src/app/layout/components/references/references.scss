@@ -33,6 +33,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
     width: 760px;
     min-height: 360px;
     border: 1px solid rgba(#2ad2c9, 0.9);
@@ -155,19 +156,19 @@
 
     &__track {
       width: 100%;
-      flex-direction: column;
       transform: none;
-      gap: 20px;
+      gap: 0;
     }
 
     &__card {
       width: 100%;
-      min-height: 210px;
-      opacity: 0.35;
+      min-height: auto;
+      display: none;
+      opacity: 1;
     }
 
     &__card--active {
-      opacity: 1;
+      display: flex;
     }
 
     &__text {
@@ -189,6 +190,10 @@
       font-size: 16px;
       white-space: normal;
     }
+
+    &__quotes {
+      left: 8px;
+    }
   }
 }
 
@@ -202,15 +207,16 @@
     }
 
     &__card {
-      border-radius: 24px;
-      padding: 48px 20px 24px;
+      min-height: auto;
+      border-radius: 34px;
+      padding: 50px 24px 24px;
     }
 
     &__quotes {
       width: 84px;
       height: 62px;
       top: -14px;
-      left: -20px;
+      left: 8px;
     }
 
     &__text {

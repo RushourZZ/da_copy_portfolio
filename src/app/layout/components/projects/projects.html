@@ -17,12 +17,12 @@
 
   <div class="projects__list">
     @for (project of projects; track project.name) {
-      <div class="projects__item">
+      <div class="projects__item" (click)="openProject($index)">
         <span class="projects__name">
           {{ project.name }}
           <span class="projects__arrow">&#8599;</span>
         </span>
-        <span class="projects__techs">{{ project.techs.join(' | ') }}</span>
+        <span class="projects__techs">{{ project.techLine }}</span>
         <div class="projects__preview-wrap">
           <div class="projects__preview-shadow"></div>
           <img class="projects__preview" [src]="project.image" [alt]="project.name" />
@@ -30,4 +30,37 @@
       </div>
     }
   </div>
+
+  @if (currentProject; as project) {
+    <div class="projects__dialog-backdrop" (click)="closeProject()">
+      <article class="projects__dialog" (click)="$event.stopPropagation()">
+        <button class="projects__dialog-close" type="button" (click)="closeProject()">&#10005;</button>
+
+        <div class="projects__dialog-left">
+          <span class="projects__dialog-index">{{ ((selectedIndex ?? 0) + 1).toString().padStart(2, '0') }}</span>
+          <h3 class="projects__dialog-name">{{ project.name }}</h3>
+          <p class="projects__dialog-about">{{ lang() === 'de' ? 'Worum geht es in diesem Projekt?' : 'What is this project about?' }}</p>
+          <p class="projects__dialog-description">{{ lang() === 'de' ? project.aboutDe : project.aboutEn }}</p>
+          <div class="projects__dialog-techs">
+            @for (icon of project.stack; track icon) {
+              <span class="projects__dialog-tech-item">
+                <img [src]="icon" [alt]="project.name + ' skill icon'" />
+              </span>
+            }
+          </div>
+          <div class="projects__dialog-actions">
+            <a [href]="project.github" target="_blank" rel="noreferrer">GitHub &#8599;</a>
+            <a [href]="project.live" target="_blank" rel="noreferrer">Live Test &#8599;</a>
+          </div>
+        </div>
+
+        <div class="projects__dialog-right">
+          <img [src]="project.image" [alt]="project.name" />
+        </div>
+        <button class="projects__dialog-next" type="button" (click)="nextProject()">
+          {{ lang() === 'de' ? 'Nächstes Projekt' : 'Next project' }} ({{ nextProjectName }}) &#8594;
+        </button>
+      </article>
+    </div>
+  }
 </section>

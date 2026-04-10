@@ -22,7 +22,7 @@
     </nav>
   </div>
 
-  <a href="#" class="header__logo">
+  <a href="#" class="header__logo header__logo--desktop">
     <svg class="header__logo-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
       <path d="M3 4H7L16 18L25 4H29V28H25V12L16 24L7 12V28H3Z" fill="currentColor" />
     </svg>
@@ -31,4 +31,47 @@
       <span class="header__logo-last">Kipka</span>
     </div>
   </a>
+
+  <a href="#" class="header__mobile-logo">M</a>
+
+  <button
+    class="header__menu-btn"
+    [class.header__menu-btn--open]="isMobileMenuOpen"
+    type="button"
+    [attr.aria-expanded]="isMobileMenuOpen"
+    aria-label="Toggle menu"
+    (click)="toggleMobileMenu()">
+    <span class="header__menu-icon" aria-hidden="true">
+      <span class="header__menu-bar"></span>
+      <span class="header__menu-bar"></span>
+      <span class="header__menu-bar"></span>
+    </span>
+  </button>
+
+  <div class="header__overlay" [class.header__overlay--open]="isMobileMenuOpen" (click)="closeMobileMenu()">
+    <nav class="header__overlay-nav" (click)="$event.stopPropagation()">
+      <a href="#about" class="header__overlay-link" (click)="closeMobileMenu()">
+        {{ activeLang() === 'de' ? 'Über mich' : 'About me' }}
+      </a>
+      <a href="#skills" class="header__overlay-link" (click)="closeMobileMenu()">Skills</a>
+      <a href="#projects" class="header__overlay-link" (click)="closeMobileMenu()">
+        {{ activeLang() === 'de' ? 'Projekte' : 'Projects' }}
+      </a>
+
+      <div class="header__overlay-lang">
+        <button
+          class="header__lang-btn"
+          [class.header__lang-btn--active]="activeLang() === 'en'"
+          (click)="setLangAndClose('en')">
+          EN
+        </button>
+        <button
+          class="header__lang-btn"
+          [class.header__lang-btn--active]="activeLang() === 'de'"
+          (click)="setLangAndClose('de')">
+          DE
+        </button>
+      </div>
+    </nav>
+  </div>
 </header>
