@@ -19,7 +19,7 @@
     <a href="https://github.com/" target="_blank" rel="noreferrer">Github</a>
     <a href="https://linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
     <a href="mailto:kontakt@kunden-navigator.de">{{ lang() === 'de' ? 'E-Mail' : 'Email' }}</a>
-    <a [href]="lang() === 'de' ? '/datenschutz' : '/privacy-policy'">{{ lang() === 'de' ? 'Datenschutz' : 'Privacy Policy' }}</a>
-    <a [href]="lang() === 'de' ? '/impressum' : '/legal-notice'">{{ lang() === 'de' ? 'Impressum' : 'Legal Notice' }}</a>
+    <a [routerLink]="lang() === 'de' ? '/datenschutz' : '/privacy-policy'">{{ lang() === 'de' ? 'Datenschutz' : 'Privacy Policy' }}</a>
+    <a [routerLink]="lang() === 'de' ? '/impressum' : '/legal-notice'">{{ lang() === 'de' ? 'Impressum' : 'Legal Notice' }}</a>
   </nav>
 </footer>

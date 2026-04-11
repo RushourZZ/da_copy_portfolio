@@ -68,6 +68,7 @@
   }
 
   &__btn {
+    position: relative;
     padding: 14px 32px;
     border: 1px solid rgba($color-text, 0.25);
     border-radius: $border-radius-btn;
@@ -79,12 +80,38 @@
     background: transparent;
     cursor: pointer;
     transition: border-color 0.3s, color 0.3s, background 0.3s;
+    overflow: clip;
 
     &:hover {
       border-color: $color-accent;
       color: $color-accent;
       background: rgba($color-accent, 0.06);
+
+      .hero__btn-sizer {
+        visibility: hidden;
+      }
+
+      .hero__btn-track {
+        animation: btnMarquee 3s linear infinite;
+      }
     }
+  }
+
+  &__btn-sizer {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  &__btn-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 3em;
+    padding-left: 32px;
+    white-space: nowrap;
   }
 
   &__scroll-hint {
@@ -242,6 +269,12 @@
   to { transform: translateX(-50%); }
 }
 
+@keyframes btnMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 1.5em)); }
+}
+
+
 @media (max-width: 1024px) {
   .hero {
     overflow-x: clip;
@@ -296,6 +329,7 @@
     &__content {
       padding: 0 20px;
       gap: 22px;
+      margin-bottom: 240px;
     }
 
     &__title {
@@ -305,13 +339,32 @@
     }
 
     &__actions {
-      flex-direction: column;
-      width: 100%;
-      max-width: 280px;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      gap: 12px;
+      width: auto;
+      max-width: 100%;
     }
 
     &__btn {
       text-align: center;
+      white-space: nowrap;
+      padding: 12px 20px;
+      overflow: visible;
+
+      &:hover .hero__btn-sizer {
+        visibility: visible;
+      }
+
+      &:hover .hero__btn-track {
+        animation: none;
+      }
+    }
+
+    &__btn-track {
+      display: none;
     }
 
     &__marquee-item {

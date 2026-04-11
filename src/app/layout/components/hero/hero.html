@@ -20,8 +20,20 @@
       Max Kipka
     </h1>
     <div class="hero__actions">
-      <a href="#projects" class="hero__btn">{{ lang() === 'de' ? 'Meine Projekte' : 'Check my work' }}</a>
-      <a href="#contact" class="hero__btn">{{ lang() === 'de' ? 'Kontakt' : 'Contact me' }}</a>
+      <a href="#projects" class="hero__btn">
+        <span class="hero__btn-sizer">{{ lang() === 'de' ? 'Meine Projekte' : 'Check my work' }}</span>
+        <span class="hero__btn-track">
+          <span>{{ lang() === 'de' ? 'Meine Projekte' : 'Check my work' }}</span>
+          <span>{{ lang() === 'de' ? 'Meine Projekte' : 'Check my work' }}</span>
+        </span>
+      </a>
+      <a href="#contact" class="hero__btn">
+        <span class="hero__btn-sizer">{{ lang() === 'de' ? 'Kontakt' : 'Contact me' }}</span>
+        <span class="hero__btn-track">
+          <span>{{ lang() === 'de' ? 'Kontakt' : 'Contact me' }}</span>
+          <span>{{ lang() === 'de' ? 'Kontakt' : 'Contact me' }}</span>
+        </span>
+      </a>
     </div>
   </div>
 

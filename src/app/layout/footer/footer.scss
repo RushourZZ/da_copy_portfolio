@@ -33,7 +33,7 @@
   &__logo-icon {
     width: 42px;
     height: 42px;
-    color: #2ad2c9;
+    color: $color-accent;
     flex: 0 0 auto;
   }
 
@@ -58,7 +58,7 @@
   &__copy {
     grid-area: copy;
     font-size: 16px;
-    color: #2ad2c9;
+    color: $color-accent;
     justify-self: center;
     align-self: start;
     white-space: nowrap;
@@ -78,7 +78,7 @@
       transition: color 0.2s ease;
 
       &:hover {
-        color: #2ad2c9;
+        color: $color-accent;
       }
     }
   }

@@ -12,14 +12,15 @@ export class Hero {
   private readonly marqueeEn = [
     'Available for remote work',
     'Frontend Developer',
-    'Based in Bayern',
+    'Based in Bavaria',
     'Open to opportunities',
   ];
+
   private readonly marqueeDe = [
-    'Verfuegbar fuer Remote-Arbeit',
+    'Verfügbar für Remote-Arbeit',
     'Frontend Entwickler',
     'Standort Bayern',
-    'Offen fuer neue Chancen',
+    'Offen für neue Chancen',
   ];
 
   protected get marqueeItems(): string[] {

@@ -11,6 +11,12 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+  overflow-x: clip;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -19,6 +25,7 @@ body {
   color: $color-text;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 body.body--menu-open {

@@ -18,20 +18,20 @@
   &__label {
     display: inline-block;
     font-size: 18px;
-    color: #2ad2c9;
+    color: $color-accent;
     margin-bottom: 22px;
   }
 
   &__title {
     font-size: clamp(40px, 5vw, 56px);
     line-height: 0.95;
-    color: #2ad2c9;
+    color: $color-accent;
     margin-bottom: 24px;
   }
 
   &__subtitle {
     font-size: clamp(28px, 3.8vw, 40px);
-    color: #2ad2c9;
+    color: $color-accent;
     margin-bottom: 18px;
   }
 
@@ -47,7 +47,7 @@
     color: rgba($color-text, 0.96);
 
     a {
-      color: #2ad2c9;
+      color: $color-accent;
     }
   }
 
@@ -63,12 +63,12 @@
     flex-direction: column;
     gap: 12px;
     padding: 16px 0 18px;
-    border-top: 1px solid rgba(#2ad2c9, 0.8);
+    border-top: 1px solid rgba($color-accent, 0.8);
   }
 
   &__field-title {
     font-size: clamp(28px, 3.5vw, 40px);
-    color: #2ad2c9;
+    color: $color-accent;
   }
 
   &__error {
@@ -105,20 +105,36 @@
 
     input {
       appearance: none;
+      position: relative;
       width: 24px;
       height: 24px;
-      border: 1px solid #2ad2c9;
+      border: 1px solid $color-accent;
       background: transparent;
       cursor: pointer;
       flex: 0 0 auto;
+      transition: background 0.25s ease;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: -6px;
+        border-radius: 50%;
+        background: transparent;
+        transition: background 0.25s ease;
+      }
+
+      &:hover::before {
+        background: rgba($color-accent, 0.15);
+      }
 
       &:checked {
-        background: #2ad2c9;
+        background: url('/browser/assets/icons/check_box_checked.png') center / contain no-repeat;
+        border: 0;
       }
     }
 
     a {
-      color: #2ad2c9;
+      color: $color-accent;
     }
   }
 
@@ -142,8 +158,8 @@
     transition: border-color 0.25s ease, color 0.25s ease;
 
     &:hover {
-      border-color: #2ad2c9;
-      color: #2ad2c9;
+      border-color: $color-accent;
+      color: $color-accent;
     }
   }
 }
