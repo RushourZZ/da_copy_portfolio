@@ -1,4 +1,5 @@
 @use 'styles/variables' as *;
+@use 'styles/mixins' as *;
 
 :host {
   display: block;
@@ -14,7 +15,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 48px;
+  padding-block: 18px;
+  @include content-padding(48px);
   // border-bottom: 1px solid rgba($color-text, 0.08);
 
   &__left {
@@ -166,7 +168,8 @@
 
 @media (max-width: 768px) {
   .header {
-    padding: 14px 20px;
+    padding-block: 14px;
+    @include content-padding(20px);
 
     &__left {
       display: none;

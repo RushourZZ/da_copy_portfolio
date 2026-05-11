@@ -1,0 +1,19 @@
+@use 'variables' as *;
+
+@mixin content-padding($side: 80px) {
+  padding-inline: max(#{$side}, calc((100% - #{$content-max-width}) / 2));
+}
+
+@mixin container {
+  width: 100%;
+  max-width: $content-max-width;
+  margin-inline: auto;
+}
+
+@mixin content-edge-left($side: 0) {
+  left: max(#{$side}, calc((100% - #{$content-max-width}) / 2));
+}
+
+@mixin content-edge-right($side: 0) {
+  right: max(#{$side}, calc((100% - #{$content-max-width}) / 2));
+}

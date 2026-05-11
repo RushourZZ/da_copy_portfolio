@@ -1,5 +1,6 @@
 @use 'styles/fonts';
 @use 'styles/variables' as *;
+@use 'styles/mixins' as *;
 
 *,
 *::before,
@@ -40,4 +41,8 @@ body.body--dialog-open {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.container {
+  @include container;
 }

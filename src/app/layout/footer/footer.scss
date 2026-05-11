@@ -1,4 +1,5 @@
 @use 'styles/variables' as *;
+@use 'styles/mixins' as *;
 
 :host {
   display: block;
@@ -13,7 +14,8 @@
   align-items: start;
   row-gap: 24px;
   column-gap: 20px;
-  padding: 54px 64px 42px;
+  padding-block: 54px 42px;
+  @include content-padding(64px);
   background: $color-bg-dark;
 
   &__brand {
@@ -86,7 +88,8 @@
 
 @media (max-width: 1200px) {
   .footer {
-    padding: 48px 28px 42px;
+    padding-block: 48px 42px;
+    @include content-padding(28px);
 
     &__logo-first,
     &__logo-last {
@@ -97,7 +100,8 @@
 
 @media (max-width: 700px) {
   .footer {
-    padding: 42px 16px 34px;
+    padding-block: 42px 34px;
+    @include content-padding(16px);
     row-gap: 18px;
     column-gap: 14px;
 

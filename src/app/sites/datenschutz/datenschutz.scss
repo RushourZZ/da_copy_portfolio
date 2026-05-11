@@ -1,8 +1,10 @@
 @use 'styles/variables' as *;
+@use 'styles/mixins' as *;
 
 .datenschutz {
   min-height: 100vh;
-  padding: 140px 24px 72px;
+  padding-block: 140px 72px;
+  @include content-padding(24px);
   background: linear-gradient(90deg, rgba($color-bg-dark, 0.98), rgba($color-bg-teal, 0.65));
 
   &__content {
@@ -54,7 +56,8 @@
 
 @media (max-width: 640px) {
   .datenschutz {
-    padding: 110px 16px 64px;
+    padding-block: 110px 64px;
+    @include content-padding(16px);
 
     &__title {
       font-size: 20px;
