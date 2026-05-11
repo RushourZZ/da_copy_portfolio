@@ -48,9 +48,54 @@
   </div>
 
   <div class="skill__grid">
-    @for (item of skills; track item.name) {
-      <div class="skill__item">
+    @for (item of skills; track item.key) {
+      <div class="skill__item" [class.skill__item--gm]="item.key === 'gm'">
         <img [src]="item.icon" [alt]="item.name" />
+
+        @if (item.key === 'gm') {
+          <div class="skill__bubble" role="tooltip">
+            <p class="skill__bubble-text">
+              {{ lang() === 'de'
+                  ? 'Ich habe ein besonderes Interesse am Lernen'
+                  : 'I have a special interest in learning' }}
+            </p>
+            <div class="skill__bubble-icons">
+              <div class="skill__bubble-icon">
+                <svg
+                  class="skill__bubble-svg"
+                  viewBox="-11.5 -10.23174 23 20.46348"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true">
+                  <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
+                  <g stroke="#61DAFB" stroke-width="1" fill="none">
+                    <ellipse rx="11" ry="4.2" />
+                    <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+                    <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+                  </g>
+                </svg>
+                <span class="skill__bubble-label">React</span>
+              </div>
+              <div class="skill__bubble-icon">
+                <svg
+                  class="skill__bubble-svg"
+                  viewBox="0 0 256 221"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true">
+                  <path
+                    d="M204.8 0H256L128 220.8 0 0h97.92L128 51.2 157.44 0h47.36Z"
+                    fill="#41B883" />
+                  <path
+                    d="M0 0l128 220.8L256 0h-51.2L128 132.48 50.56 0H0Z"
+                    fill="#41B883" />
+                  <path
+                    d="M50.56 0L128 133.12 204.8 0h-47.36L128 51.2 97.92 0H50.56Z"
+                    fill="#35495E" />
+                </svg>
+                <span class="skill__bubble-label">Vue Js</span>
+              </div>
+            </div>
+          </div>
+        }
       </div>
     }
   </div>
