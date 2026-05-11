@@ -1,6 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { LanguageService } from '../../../language.service';
+
+type FieldKey = 'name' | 'email' | 'message';
+type Locale = { de: string; en: string };
+
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 @Component({
   selector: 'app-contact',
@@ -15,31 +20,79 @@ export class ContactComponent {
   protected submitted = false;
 
   protected readonly form = this.fb.group({
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    message: ['', Validators.required],
+    name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(60)]],
+    email: ['', [Validators.required, Validators.pattern(EMAIL_REGEX), Validators.maxLength(120)]],
+    message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
     consent: [false, Validators.requiredTrue],
   });
 
-  protected submit(): void {
-    this.submitted = true;
-    if (this.form.invalid) return;
-    this.form.reset({ name: '', email: '', message: '', consent: false });
-    this.submitted = false;
+  private readonly MSG: {
+    required: Record<FieldKey, Locale>;
+    minLength: Record<FieldKey, Locale>;
+    maxLength: Locale;
+    email: Locale;
+    consent: Locale;
+  } = {
+    required: {
+      name: { de: 'Ups! dein Name fehlt', en: 'Oops! it seems your name is missing' },
+      email: { de: 'Hoppla! deine E-Mail fehlt', en: 'Hoppla! your email is required' },
+      message: { de: 'Was moechtest du entwickeln?', en: 'What do you need to develop?' },
+    },
+    minLength: {
+      name: { de: 'Mindestens 2 Zeichen', en: 'At least 2 characters' },
+      email: { de: 'E-Mail ist zu kurz', en: 'Email is too short' },
+      message: { de: 'Mindestens 10 Zeichen, damit ich dir helfen kann', en: 'At least 10 characters so I can help you' },
+    },
+    maxLength: { de: 'Maximale Laenge ueberschritten', en: 'Maximum length exceeded' },
+    email: { de: 'Bitte gib eine gueltige E-Mail ein', en: 'Please enter a valid email' },
+    consent: { de: 'Bitte akzeptiere die Datenschutzerklärung.', en: 'Please accept the privacy policy.' },
+  };
+
+  protected showError(field: FieldKey): boolean {
+    const c = this.form.controls[field];
+    return c.invalid && (c.touched || this.submitted);
   }
 
-  protected error(field: 'name' | 'email' | 'message'): string {
-    const control = this.form.controls[field];
-    if (!this.submitted || !control.invalid) return '';
-    if (field === 'name') return this.lang() === 'de' ? 'Ups! dein Name fehlt' : 'Oops! it seems your name is missing';
-    if (field === 'message') return this.lang() === 'de' ? 'Was moechtest du entwickeln?' : 'What do you need to develop?';
-    if (control.hasError('email')) return this.lang() === 'de' ? 'Bitte gib eine gueltige E-Mail ein' : 'Please enter a valid email';
-    return this.lang() === 'de' ? 'Hoppla! deine E-Mail fehlt' : 'Hoppla! your email is required';
+  protected showValid(field: FieldKey): boolean {
+    const c = this.form.controls[field];
+    return c.valid && c.touched;
+  }
+
+  protected error(field: FieldKey): string {
+    if (!this.showError(field)) return '';
+    const c = this.form.controls[field];
+    return this.firstMessage(field, c.errors, this.lang() === 'de');
+  }
+
+  private firstMessage(field: FieldKey, errs: ValidationErrors | null, de: boolean): string {
+    if (errs?.['required']) return this.pick(this.MSG.required[field], de);
+    if (errs?.['minlength']) return this.pick(this.MSG.minLength[field], de);
+    if (errs?.['maxlength']) return this.pick(this.MSG.maxLength, de);
+    if (errs?.['pattern']) return this.pick(this.MSG.email, de);
+    return '';
+  }
+
+  private pick(msg: Locale, de: boolean): string {
+    return de ? msg.de : msg.en;
+  }
+
+  protected consentInvalid(): boolean {
+    const c = this.form.controls.consent;
+    return c.invalid && (c.touched || this.submitted);
   }
 
   protected consentError(): string {
-    const invalid = this.form.controls.consent.invalid;
-    if (!this.submitted || !invalid) return '';
-    return this.lang() === 'de' ? 'Bitte akzeptiere die Datenschutzerklärung.' : 'Please accept the privacy policy.';
+    if (!this.consentInvalid()) return '';
+    return this.pick(this.MSG.consent, this.lang() === 'de');
+  }
+
+  protected submit(): void {
+    this.submitted = true;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    this.form.reset({ name: '', email: '', message: '', consent: false });
+    this.submitted = false;
   }
 }

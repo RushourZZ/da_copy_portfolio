@@ -1,4 +1,5 @@
 @use 'styles/variables' as *;
+@use 'styles/mixins' as *;
 
 :host {
   display: block;
@@ -8,7 +9,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 56px;
-  padding: 90px 64px 120px;
+  padding-block: 90px 120px;
+  @include content-padding(64px);
   background: $color-bg-dark;
 
   &__intro {
@@ -64,6 +66,15 @@
     gap: 12px;
     padding: 16px 0 18px;
     border-top: 1px solid rgba($color-accent, 0.8);
+    transition: border-color 0.25s ease;
+
+    &--invalid {
+      border-top-color: #d57579;
+    }
+
+    &--valid {
+      border-top-color: $color-accent;
+    }
   }
 
   &__field-title {
@@ -103,6 +114,10 @@
     color: rgba($color-text, 0.95);
     padding-top: 14px;
 
+    &--invalid input {
+      border-color: #d57579;
+    }
+
     input {
       appearance: none;
       position: relative;
@@ -112,7 +127,7 @@
       background: transparent;
       cursor: pointer;
       flex: 0 0 auto;
-      transition: background 0.25s ease;
+      transition: background 0.25s ease, border-color 0.25s ease;
 
       &::before {
         content: '';
@@ -128,8 +143,19 @@
       }
 
       &:checked {
-        background: url('/browser/assets/icons/check_box_checked.png') center / contain no-repeat;
-        border: 0;
+        background: transparent;
+      }
+
+      &:checked::after {
+        content: '';
+        position: absolute;
+        left: 7px;
+        top: 2px;
+        width: 6px;
+        height: 12px;
+        border: solid $color-accent;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
       }
     }
 
@@ -155,11 +181,23 @@
     font-size: 16px;
     font-family: inherit;
     cursor: pointer;
-    transition: border-color 0.25s ease, color 0.25s ease;
+    transition: border-color 0.25s ease, color 0.25s ease, opacity 0.25s ease;
 
     &:hover {
       border-color: $color-accent;
       color: $color-accent;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      border-color: rgba($color-text, 0.25);
+      color: rgba($color-text, 0.55);
+    }
+
+    &:disabled:hover {
+      border-color: rgba($color-text, 0.25);
+      color: rgba($color-text, 0.55);
     }
   }
 }
@@ -168,7 +206,8 @@
   .contact {
     grid-template-columns: 1fr;
     gap: 36px;
-    padding: 72px 28px 96px;
+    padding-block: 72px 96px;
+    @include content-padding(28px);
 
     &__field-title {
       font-size: 32px;
@@ -200,7 +239,8 @@
 
 @media (max-width: 700px) {
   .contact {
-    padding: 56px 20px 80px;
+    padding-block: 56px 80px;
+    @include content-padding(20px);
 
     &__label {
       font-size: 18px;

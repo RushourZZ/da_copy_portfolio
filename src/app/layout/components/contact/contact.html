@@ -24,30 +24,41 @@
     }
   </div>
 
-  <form class="contact__form" [formGroup]="form" (ngSubmit)="submit()">
-    <label class="contact__field">
+  <form class="contact__form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <label
+      class="contact__field"
+      [class.contact__field--invalid]="showError('name')"
+      [class.contact__field--valid]="showValid('name')">
       <span class="contact__field-title">{{ lang() === 'de' ? 'Wie heisst du?' : "What's your name?" }}</span>
       <input
         type="text"
         formControlName="name"
+        autocomplete="name"
         [placeholder]="lang() === 'de' ? 'Dein Name kommt hier hin' : 'Your name goes here'" />
       @if (error('name')) {
         <span class="contact__error">{{ error('name') }}</span>
       }
     </label>
 
-    <label class="contact__field">
+    <label
+      class="contact__field"
+      [class.contact__field--invalid]="showError('email')"
+      [class.contact__field--valid]="showValid('email')">
       <span class="contact__field-title">{{ lang() === 'de' ? 'Wie lautet deine E-Mail?' : "What's your email?" }}</span>
       <input
         type="email"
         formControlName="email"
+        autocomplete="email"
         [placeholder]="lang() === 'de' ? 'deine@email.com' : 'your@email.com'" />
       @if (error('email')) {
         <span class="contact__error">{{ error('email') }}</span>
       }
     </label>
 
-    <label class="contact__field">
+    <label
+      class="contact__field"
+      [class.contact__field--invalid]="showError('message')"
+      [class.contact__field--valid]="showValid('message')">
       <span class="contact__field-title">{{ lang() === 'de' ? 'Wie kann ich helfen?' : 'How can I help you?' }}</span>
       <textarea
         formControlName="message"
@@ -58,7 +69,9 @@
       }
     </label>
 
-    <label class="contact__policy">
+    <label
+      class="contact__policy"
+      [class.contact__policy--invalid]="consentInvalid()">
       <input type="checkbox" formControlName="consent" />
       @if (lang() === 'de') {
         <span>Ich habe die <a href="datenschutz">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu.</span>
@@ -70,6 +83,11 @@
       <span class="contact__policy-error">{{ consentError() }}</span>
     }
 
-    <button type="submit" class="contact__submit">{{ lang() === 'de' ? 'Sag Hallo ;)' : 'Say Hello ;)' }}</button>
+    <button
+      type="submit"
+      class="contact__submit"
+      [disabled]="form.invalid">
+      {{ lang() === 'de' ? 'Sag Hallo ;)' : 'Say Hello ;)' }}
+    </button>
   </form>
 </section>
