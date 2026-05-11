@@ -1,10 +1,13 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, HostListener, OnDestroy, inject } from '@angular/core';
 import { LanguageService } from '../../../language.service';
+
+type TechKey = 'css' | 'html' | 'js' | 'ts' | 'angular' | 'firebase';
+type TechItem = { key: TechKey; name: string; icon: string };
 
 type ProjectItem = {
   name: string;
   techLine: string;
-  stack: string[];
+  stack: TechItem[];
   image: string;
   github: string;
   live: string;
@@ -23,17 +26,22 @@ export class Projects implements OnDestroy {
   private readonly language = inject(LanguageService);
   protected readonly lang = this.language.lang;
   protected selectedIndex: number | null = null;
+  protected activeTech: number | null = null;
+
+  private readonly TECHS: Record<TechKey, TechItem> = {
+    css: { key: 'css', name: 'CSS', icon: 'assets/icons/css.svg' },
+    html: { key: 'html', name: 'HTML', icon: 'assets/icons/html.svg' },
+    js: { key: 'js', name: 'JavaScript', icon: 'assets/icons/js.svg' },
+    ts: { key: 'ts', name: 'TypeScript', icon: 'assets/icons/typescript.svg' },
+    angular: { key: 'angular', name: 'Angular', icon: 'assets/icons/angular.svg' },
+    firebase: { key: 'firebase', name: 'Firebase', icon: 'assets/icons/firebase.svg' },
+  };
+
   protected readonly projects: ProjectItem[] = [
     {
       name: 'Join',
       techLine: 'CSS | HTML | Firebase | Angular | TypeScript',
-      stack: [
-        'assets/icons/css.skill.png',
-        'assets/icons/html.skill.png',
-        'assets/icons/firebase.skill.png',
-        'assets/icons/angular.skill.png',
-        'assets/icons/ts.skill.png',
-      ],
+      stack: [this.TECHS.css, this.TECHS.html, this.TECHS.firebase, this.TECHS.angular, this.TECHS.ts],
       image: 'assets/img/join.png',
       github: 'https://github.com/',
       live: 'https://example.com',
@@ -43,11 +51,7 @@ export class Projects implements OnDestroy {
     {
       name: 'El Pollo Loco',
       techLine: 'JavaScript | HTML | CSS',
-      stack: [
-        'assets/icons/js.skill.png',
-        'assets/icons/html.skill.png',
-        'assets/icons/css.skill.png',
-      ],
+      stack: [this.TECHS.js, this.TECHS.html, this.TECHS.css],
       image: 'assets/img/loco.png',
       github: 'https://github.com/RushourZZ/el_pollo_loco',
       live: 'https://maxkipka.developerakademie.net/el_pollo_loco/index.html',
@@ -57,11 +61,7 @@ export class Projects implements OnDestroy {
     {
       name: 'DA Bubble',
       techLine: 'Angular | Firebase | TypeScript',
-      stack: [
-        'assets/icons/angular.skill.png',
-        'assets/icons/firebase.skill.png',
-        'assets/icons/ts.skill.png',
-      ],
+      stack: [this.TECHS.angular, this.TECHS.firebase, this.TECHS.ts],
       image: 'assets/img/bubble.png',
       github: 'https://github.com/',
       live: 'https://example.com',
@@ -72,17 +72,32 @@ export class Projects implements OnDestroy {
 
   protected openProject(index: number): void {
     this.selectedIndex = index;
+    this.activeTech = null;
     this.updateBodyLock();
   }
 
   protected closeProject(): void {
     this.selectedIndex = null;
+    this.activeTech = null;
     this.updateBodyLock();
   }
 
   protected nextProject(): void {
     if (this.selectedIndex === null) return;
     this.selectedIndex = (this.selectedIndex + 1) % this.projects.length;
+    this.activeTech = null;
+  }
+
+  protected toggleTech(index: number, event: Event): void {
+    event.stopPropagation();
+    this.activeTech = this.activeTech === index ? null : index;
+  }
+
+  @HostListener('document:click', ['$event'])
+  protected onDocClick(event: MouseEvent): void {
+    if (this.activeTech === null) return;
+    const target = event.target as HTMLElement | null;
+    if (!target?.closest('.projects__dialog-tech-item')) this.activeTech = null;
   }
 
   protected get currentProject(): ProjectItem | null {

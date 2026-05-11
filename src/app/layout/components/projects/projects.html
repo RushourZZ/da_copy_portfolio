@@ -42,10 +42,17 @@
           <p class="projects__dialog-about">{{ lang() === 'de' ? 'Worum geht es in diesem Projekt?' : 'What is this project about?' }}</p>
           <p class="projects__dialog-description">{{ lang() === 'de' ? project.aboutDe : project.aboutEn }}</p>
           <div class="projects__dialog-techs">
-            @for (icon of project.stack; track icon) {
-              <span class="projects__dialog-tech-item">
-                <img [src]="icon" [alt]="project.name + ' skill icon'" />
-              </span>
+            @for (tech of project.stack; track tech.key; let i = $index) {
+              <button
+                type="button"
+                class="projects__dialog-tech-item"
+                [class.projects__dialog-tech-item--active]="activeTech === i"
+                [attr.aria-label]="tech.name"
+                [attr.aria-expanded]="activeTech === i"
+                (click)="toggleTech(i, $event)">
+                <img class="projects__dialog-tech-img" [src]="tech.icon" [alt]="tech.name" />
+                <span class="projects__dialog-tech-tooltip" role="tooltip">{{ tech.name }}</span>
+              </button>
             }
           </div>
           <div class="projects__dialog-actions">

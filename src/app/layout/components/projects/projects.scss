@@ -1,4 +1,5 @@
 @use 'styles/variables' as *;
+@use 'styles/mixins' as *;
 
 :host {
   display: block;
@@ -6,7 +7,8 @@
 
 .projects {
   position: relative;
-  padding: 120px 80px;
+  padding-block: 120px;
+  @include content-padding(80px);
   background: $color-bg-dark;
 
   &__header {
@@ -198,14 +200,30 @@
   }
 
   &__dialog-tech-item {
+    position: relative;
     display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+  }
 
-    img {
-      width: auto;
-      height: 20px;
-      object-fit: contain;
-      margin: 30px 0;
-    }
+  &__dialog-tech-img {
+    width: auto;
+    height: 20px;
+    object-fit: contain;
+    margin: 30px 0;
+  }
+
+  &__dialog-tech-tooltip {
+    display: inline;
+    font-size: 16px;
+    font-weight: 500;
+    color: $color-text;
   }
 
   &__dialog-actions {
@@ -265,7 +283,8 @@
 
 @media (max-width: 1024px) {
   .projects {
-    padding: 80px 32px;
+    padding-block: 80px;
+    @include content-padding(32px);
 
     &__list {
       max-width: 100%;
@@ -300,20 +319,20 @@
       justify-self: auto;
     }
 
-    &__dialog-tech-item img {
+    &__dialog-tech-img {
       margin: 0;
     }
 
     &__dialog-right img {
       margin: 0;
-      margin-top: 42px;
     }
   }
 }
 
 @media (max-width: 640px) {
   .projects {
-    padding: 60px 20px;
+    padding-block: 60px;
+    @include content-padding(20px);
 
     &__item {
       flex-direction: column;
@@ -342,10 +361,11 @@
     &__dialog-right {
       order: 1;
       align-items: stretch;
-      flex: 1 1 auto;
+      flex: 0 0 auto;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
+      padding-top: 28px;
     }
 
     &__dialog-left {
@@ -394,9 +414,46 @@
       margin-top: 4px;
     }
 
-    &__dialog-tech-item img {
-      height: 20px;
+    &__dialog-tech-item {
+      padding: 4px;
+    }
+
+    &__dialog-tech-img {
+      display: block;
+      width: 28px;
+      height: 28px;
       margin: 0;
+    }
+
+    &__dialog-tech-tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 10px;
+      background: $color-text;
+      color: $color-bg-dark;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 8px;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 5;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid transparent;
+        border-top-color: $color-text;
+      }
+    }
+
+    &__dialog-tech-item--active &__dialog-tech-tooltip {
+      display: block;
     }
 
     &__dialog-actions {
