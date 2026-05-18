@@ -1,9 +1,11 @@
 import { Component, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { LanguageService } from '../../../language.service';
 
 type FieldKey = 'name' | 'email' | 'message';
 type Locale = { de: string; en: string };
+type SubmitStatus = 'idle' | 'sending' | 'success' | 'error';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -14,10 +16,13 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   styleUrl: './contact.scss',
 })
 export class ContactComponent {
+  private static readonly ENDPOINT = 'send_mail.php';
   private readonly fb = inject(FormBuilder);
+  private readonly http = inject(HttpClient);
   private readonly language = inject(LanguageService);
   protected readonly lang = this.language.lang;
   protected submitted = false;
+  protected status: SubmitStatus = 'idle';
 
   protected readonly form = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(60)]],
@@ -32,6 +37,8 @@ export class ContactComponent {
     maxLength: Locale;
     email: Locale;
     consent: Locale;
+    success: Locale;
+    errorSend: Locale;
   } = {
     required: {
       name: { de: 'Ups! dein Name fehlt', en: 'Oops! it seems your name is missing' },
@@ -46,6 +53,14 @@ export class ContactComponent {
     maxLength: { de: 'Maximale Laenge ueberschritten', en: 'Maximum length exceeded' },
     email: { de: 'Bitte gib eine gueltige E-Mail ein', en: 'Please enter a valid email' },
     consent: { de: 'Bitte akzeptiere die Datenschutzerklärung.', en: 'Please accept the privacy policy.' },
+    success: {
+      de: 'Danke! Deine Nachricht wurde gesendet.',
+      en: 'Thank you! Your message has been sent.',
+    },
+    errorSend: {
+      de: 'Senden fehlgeschlagen. Bitte versuche es später erneut.',
+      en: 'Sending failed. Please try again later.',
+    },
   };
 
   protected showError(field: FieldKey): boolean {
@@ -86,13 +101,38 @@ export class ContactComponent {
     return this.pick(this.MSG.consent, this.lang() === 'de');
   }
 
+  protected statusMessage(): string {
+    const de = this.lang() === 'de';
+    if (this.status === 'success') return this.pick(this.MSG.success, de);
+    if (this.status === 'error') return this.pick(this.MSG.errorSend, de);
+    return '';
+  }
+
   protected submit(): void {
     this.submitted = true;
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
+    this.sendForm();
+  }
+
+  private sendForm(): void {
+    this.status = 'sending';
+    const payload = this.form.getRawValue();
+    this.http.post<{ success: boolean }>(ContactComponent.ENDPOINT, payload).subscribe({
+      next: (res) => (res?.success ? this.onSuccess() : this.onError()),
+      error: () => this.onError(),
+    });
+  }
+
+  private onSuccess(): void {
+    this.status = 'success';
     this.form.reset({ name: '', email: '', message: '', consent: false });
     this.submitted = false;
+  }
+
+  private onError(): void {
+    this.status = 'error';
   }
 }
