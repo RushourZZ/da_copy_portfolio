@@ -17,7 +17,8 @@ const FULLNAME_REGEX = /^(?!.*\..*\.)[a-zA-ZäöüÄÖÜéèêëàâïîôûçñ
   styleUrl: './contact.scss',
 })
 export class ContactComponent {
-  private static readonly ENDPOINT = 'send_mail.php';
+  private static readonly ENDPOINT = 'https://api.web3forms.com/submit';
+  private static readonly ACCESS_KEY = '60354f74-b935-4622-995c-7fc70b8c21c4';
   private readonly fb = inject(FormBuilder);
   private readonly http = inject(HttpClient);
   private readonly language = inject(LanguageService);
@@ -126,7 +127,15 @@ export class ContactComponent {
 
   private sendForm(): void {
     this.status = 'sending';
-    const payload = this.form.getRawValue();
+    const raw = this.form.getRawValue();
+    const payload = {
+      access_key: ContactComponent.ACCESS_KEY,
+      name: raw.name,
+      email: raw.email,
+      message: raw.message,
+      subject: 'Kontaktformular Portfolio',
+      from_name: 'Portfolio Website',
+    };
     this.http.post<{ success: boolean }>(ContactComponent.ENDPOINT, payload).subscribe({
       next: (res) => (res?.success ? this.onSuccess() : this.onError()),
       error: () => this.onError(),
