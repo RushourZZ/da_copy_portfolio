@@ -8,6 +8,7 @@ type Locale = { de: string; en: string };
 type SubmitStatus = 'idle' | 'sending' | 'success' | 'error';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const FULLNAME_REGEX = /^(?!.*\..*\.)[a-zA-ZäöüÄÖÜéèêëàâïîôûçñß.\-]+\s+[a-zA-ZäöüÄÖÜéèêëàâïîôûçñß.\-\s]+$/;
 
 @Component({
   selector: 'app-contact',
@@ -25,7 +26,7 @@ export class ContactComponent {
   protected status: SubmitStatus = 'idle';
 
   protected readonly form = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(60)]],
+    name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(60), Validators.pattern(FULLNAME_REGEX)]],
     email: ['', [Validators.required, Validators.pattern(EMAIL_REGEX), Validators.maxLength(120)]],
     message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
     consent: [false, Validators.requiredTrue],
@@ -36,6 +37,7 @@ export class ContactComponent {
     minLength: Record<FieldKey, Locale>;
     maxLength: Locale;
     email: Locale;
+    fullName: Locale;
     consent: Locale;
     success: Locale;
     errorSend: Locale;
@@ -52,6 +54,7 @@ export class ContactComponent {
     },
     maxLength: { de: 'Maximale Laenge ueberschritten', en: 'Maximum length exceeded' },
     email: { de: 'Bitte gib eine gueltige E-Mail ein', en: 'Please enter a valid email' },
+    fullName: { de: 'Vor- und Nachname ohne Sonderzeichen (max. ein Punkt)', en: 'First and last name without special characters (max. one dot)' },
     consent: { de: 'Bitte akzeptiere die Datenschutzerklärung.', en: 'Please accept the privacy policy.' },
     success: {
       de: 'Danke! Deine Nachricht wurde gesendet.',
@@ -83,7 +86,11 @@ export class ContactComponent {
     if (errs?.['required']) return this.pick(this.MSG.required[field], de);
     if (errs?.['minlength']) return this.pick(this.MSG.minLength[field], de);
     if (errs?.['maxlength']) return this.pick(this.MSG.maxLength, de);
-    if (errs?.['pattern']) return this.pick(this.MSG.email, de);
+    if (errs?.['pattern']) {
+      return field === 'name'
+        ? this.pick(this.MSG.fullName, de)
+        : this.pick(this.MSG.email, de);
+    }
     return '';
   }
 
