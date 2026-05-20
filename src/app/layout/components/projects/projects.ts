@@ -43,8 +43,8 @@ export class Projects implements OnDestroy {
       techLine: 'CSS | HTML | Firebase | Angular | TypeScript',
       stack: [this.TECHS.css, this.TECHS.html, this.TECHS.firebase, this.TECHS.angular, this.TECHS.ts],
       image: 'assets/img/join.png',
-      github: 'https://github.com/',
-      live: 'https://example.com',
+      github: 'https://github.com/RushourZZ/join',
+      live: 'https://maxkipka.developerakademie.net/join/#/contacts',
       aboutDe: 'Task Manager im Kanban-System. Aufgaben erstellen, organisieren und per Drag-and-Drop verschieben.',
       aboutEn: 'Task manager inspired by the Kanban system. Create, organize, and move tasks with drag and drop.',
     },
@@ -57,16 +57,6 @@ export class Projects implements OnDestroy {
       live: 'https://maxkipka.developerakademie.net/el_pollo_loco/index.html',
       aboutDe: '2D Jump-and-Run mit eigener Spiel-Logik, Kollisionen, Animationen und Soundsteuerung.',
       aboutEn: '2D jump-and-run game with custom logic, collisions, animations, and audio controls.',
-    },
-    {
-      name: 'DA Bubble',
-      techLine: 'Angular | Firebase | TypeScript',
-      stack: [this.TECHS.angular, this.TECHS.firebase, this.TECHS.ts],
-      image: 'assets/img/bubble.png',
-      github: 'https://github.com/',
-      live: 'https://example.com',
-      aboutDe: 'Chat-Anwendung mit Realtime-Nachrichten, Channels und moderner Angular-Architektur.',
-      aboutEn: 'Chat app with real-time messaging, channels, and a modern Angular architecture.',
     },
   ];
 
