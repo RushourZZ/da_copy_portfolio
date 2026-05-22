@@ -1,23 +1,25 @@
 <section class="references" id="references">
   <h2 class="references__title">{{ lang() === 'de' ? 'Was Kolleginnen und Kollegen über mich sagen' : 'What my colleagues say about me' }}</h2>
 
-  <div class="references__track" [style.--active-index]="activeIndex">
-    @for (reference of references; track reference.author) {
-      <article class="references__card" [class.references__card--active]="$index === activeIndex">
-        @if ($index === activeIndex) {
-          <img class="references__quotes" src="assets/icons/quotes.png" alt="Quote icon" />
-        }
+  <div class="references__viewport">
+    <div class="references__track" [style.--active-index]="activeIndex">
+      @for (reference of references; track reference.author) {
+        <article class="references__card" [class.references__card--active]="$index === activeIndex">
+          @if ($index === activeIndex) {
+            <img class="references__quotes" src="assets/icons/quotes.png" alt="Quote icon" />
+          }
 
-        <p class="references__text">
-          {{ reference.text }}
-        </p>
+          <p class="references__text">
+            {{ reference.text }}
+          </p>
 
-        <div class="references__meta">
-          <span class="references__line"></span>
-          <span class="references__author">{{ reference.author }} - {{ reference.role }}</span>
-        </div>
-      </article>
-    }
+          <div class="references__meta">
+            <span class="references__line"></span>
+            <span class="references__author">{{ reference.author }} - {{ reference.role }}</span>
+          </div>
+        </article>
+      }
+    </div>
   </div>
 
   <div class="references__controls">

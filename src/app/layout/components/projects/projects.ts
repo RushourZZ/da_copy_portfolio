@@ -1,5 +1,6 @@
 import { Component, HostListener, OnDestroy, inject } from '@angular/core';
 import { LanguageService } from '../../../language.service';
+import { ScrollLockService } from '../../../scroll-lock.service';
 
 type TechKey = 'css' | 'html' | 'js' | 'ts' | 'angular' | 'firebase';
 type TechItem = { key: TechKey; name: string; icon: string };
@@ -22,11 +23,12 @@ type ProjectItem = {
   styleUrl: './projects.scss',
 })
 export class Projects implements OnDestroy {
-  private static readonly BODY_DIALOG_LOCK = 'body--dialog-open';
   private readonly language = inject(LanguageService);
+  private readonly scrollLock = inject(ScrollLockService);
   protected readonly lang = this.language.lang;
   protected selectedIndex: number | null = null;
   protected activeTech: number | null = null;
+  private isLocked = false;
 
   private readonly TECHS: Record<TechKey, TechItem> = {
     css: { key: 'css', name: 'CSS', icon: 'assets/icons/css.svg' },
@@ -63,13 +65,19 @@ export class Projects implements OnDestroy {
   protected openProject(index: number): void {
     this.selectedIndex = index;
     this.activeTech = null;
-    this.updateBodyLock();
+    if (!this.isLocked) {
+      this.scrollLock.lock();
+      this.isLocked = true;
+    }
   }
 
   protected closeProject(): void {
     this.selectedIndex = null;
     this.activeTech = null;
-    this.updateBodyLock();
+    if (this.isLocked) {
+      this.scrollLock.unlock();
+      this.isLocked = false;
+    }
   }
 
   protected nextProject(): void {
@@ -101,12 +109,10 @@ export class Projects implements OnDestroy {
     return this.projects[next].name;
   }
 
-  private updateBodyLock(): void {
-    const isOpen = this.selectedIndex !== null;
-    document.body.classList.toggle(Projects.BODY_DIALOG_LOCK, isOpen);
-  }
-
   ngOnDestroy(): void {
-    document.body.classList.remove(Projects.BODY_DIALOG_LOCK);
+    if (this.isLocked) {
+      this.scrollLock.unlock();
+      this.isLocked = false;
+    }
   }
 }

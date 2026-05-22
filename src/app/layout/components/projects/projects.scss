@@ -133,6 +133,7 @@
     place-items: center;
     z-index: 220;
     padding: 20px;
+    overscroll-behavior: contain;
   }
 
   &__dialog {

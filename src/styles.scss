@@ -22,20 +22,20 @@ html::-webkit-scrollbar {
 
 body {
   font-family: $font-main;
-  background: $color-bg;
+  background: $color-bg-dark;
   color: $color-text;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
 }
 
-body.body--menu-open {
-  overflow-y: clip;
+body.body--scroll-locked {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
   touch-action: none;
-}
-
-body.body--dialog-open {
-  overflow-y: clip;
 }
 
 a {

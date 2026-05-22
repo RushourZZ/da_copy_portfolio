@@ -1,5 +1,6 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { Lang, LanguageService } from '../../language.service';
+import { ScrollLockService } from '../../scroll-lock.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,11 @@ import { Lang, LanguageService } from '../../language.service';
   styleUrl: './header.scss',
 })
 export class Header implements OnDestroy {
-  private static readonly BODY_MENU_LOCK = 'body--menu-open';
   private readonly language = inject(LanguageService);
+  private readonly scrollLock = inject(ScrollLockService);
   protected readonly activeLang = this.language.lang;
   protected isMobileMenuOpen = false;
+  private isLocked = false;
 
   protected setLang(lang: Lang): void {
     this.language.setLang(lang);
@@ -23,19 +25,28 @@ export class Header implements OnDestroy {
 
   protected toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    this.updateBodyLock();
+    this.syncLock();
   }
 
   protected closeMobileMenu(): void {
     this.isMobileMenuOpen = false;
-    this.updateBodyLock();
+    this.syncLock();
   }
 
   ngOnDestroy(): void {
-    document.body.classList.remove(Header.BODY_MENU_LOCK);
+    if (this.isLocked) {
+      this.scrollLock.unlock();
+      this.isLocked = false;
+    }
   }
 
-  private updateBodyLock(): void {
-    document.body.classList.toggle(Header.BODY_MENU_LOCK, this.isMobileMenuOpen);
+  private syncLock(): void {
+    if (this.isMobileMenuOpen && !this.isLocked) {
+      this.scrollLock.lock();
+      this.isLocked = true;
+    } else if (!this.isMobileMenuOpen && this.isLocked) {
+      this.scrollLock.unlock();
+      this.isLocked = false;
+    }
   }
 }

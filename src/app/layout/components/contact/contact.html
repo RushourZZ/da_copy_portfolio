@@ -35,9 +35,7 @@
         formControlName="name"
         autocomplete="name"
         [placeholder]="lang() === 'de' ? 'Dein Name kommt hier hin' : 'Your name goes here'" />
-      @if (error('name')) {
-        <span class="contact__error">{{ error('name') }}</span>
-      }
+      <span class="contact__error">{{ error('name') }}</span>
     </label>
 
     <label
@@ -50,9 +48,7 @@
         formControlName="email"
         autocomplete="email"
         [placeholder]="lang() === 'de' ? 'deine@email.com' : 'your@email.com'" />
-      @if (error('email')) {
-        <span class="contact__error">{{ error('email') }}</span>
-      }
+      <span class="contact__error">{{ error('email') }}</span>
     </label>
 
     <label
@@ -62,26 +58,26 @@
       <span class="contact__field-title">{{ lang() === 'de' ? 'Wie kann ich helfen?' : 'How can I help you?' }}</span>
       <textarea
         formControlName="message"
-        rows="1"
+        rows="3"
         [placeholder]="lang() === 'de' ? 'Hallo Max, ich interessiere mich für...' : 'Hello Max, I am interested in...'"></textarea>
-      @if (error('message')) {
-        <span class="contact__error">{{ error('message') }}</span>
-      }
+      <span class="contact__error">{{ error('message') }}</span>
     </label>
 
-    <label
+    <div
       class="contact__policy"
       [class.contact__policy--invalid]="consentInvalid()">
-      <input type="checkbox" formControlName="consent" />
-      @if (lang() === 'de') {
-        <span>Ich habe die <a href="datenschutz">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu.</span>
-      } @else {
-        <span>I've read the <a href="privacy-policy">privacy policy</a> and agree to the processing of my data as outlined.</span>
-      }
-    </label>
-    @if (consentError()) {
-      <span class="contact__policy-error">{{ consentError() }}</span>
-    }
+      <label class="contact__policy-checkbox">
+        <input type="checkbox" formControlName="consent" aria-labelledby="consent-text" />
+      </label>
+      <span id="consent-text" class="contact__policy-text">
+        @if (lang() === 'de') {
+          Ich habe die <a href="datenschutz">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu.
+        } @else {
+          I've read the <a href="privacy-policy">privacy policy</a> and agree to the processing of my data as outlined.
+        }
+      </span>
+    </div>
+    <span class="contact__policy-error">{{ consentError() }}</span>
 
     <button
       type="submit"
@@ -94,14 +90,12 @@
       }
     </button>
 
-    @if (status === 'success' || status === 'error') {
-      <p
-        class="contact__status"
-        [class.contact__status--success]="status === 'success'"
-        [class.contact__status--error]="status === 'error'"
-        role="status">
-        {{ statusMessage() }}
-      </p>
-    }
+    <p
+      class="contact__status"
+      [class.contact__status--success]="status === 'success'"
+      [class.contact__status--error]="status === 'error'"
+      role="status">
+      {{ statusMessage() }}
+    </p>
   </form>
 </section>
